@@ -26,11 +26,33 @@
         >
       </template>
     </nav>
+    <button
+      @click="toggleTheme"
+      type="button"
+      aria-label="Toggle dark mode"
+      class="p-2 rounded-lg hover:bg-pink-900/10 dark:hover:bg-yellow-500/10 transition-colors duration-200"
+    >
+      <!-- Sun icon (shown in dark mode) -->
+      <SunIcon
+        v-if="isDark"
+        class="w-6 h-6 text-yellow-500 transition-transform duration-300 hover:rotate-12"
+      />
+      <!-- Moon icon (shown in light mode) -->
+      <MoonIcon
+        v-else
+        class="w-6 h-6 text-pink-900 transition-transform duration-300 hover:-rotate-12"
+      />
+    </button>
   </header>
 </template>
 <script setup lang="ts">
 import "@/assets/css/main.css";
 import { RouterLink } from "vue-router";
+import { SunIcon, MoonIcon } from "@heroicons/vue/24/solid";
+import { useDarkMode } from "@/composables/useDarkMode";
+
+const { isDark, toggleTheme } = useDarkMode();
+
 const nav = [
   {
     name: "Home",
@@ -48,44 +70,4 @@ const nav = [
     ariaLabel: "Navigate to Projects",
   },
 ];
-
-// var themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
-// var themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
-
-// // Change the icons inside the button based on previous settings
-// if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-//     themeToggleLightIcon.classList.remove('hidden');
-// } else {
-//     themeToggleDarkIcon.classList.remove('hidden');
-// }
-
-// var themeToggleBtn = document.getElementById('theme-toggle');
-
-// themeToggleBtn.addEventListener('click', function() {
-
-//     // toggle icons inside button
-//     themeToggleDarkIcon.classList.toggle('hidden');
-//     themeToggleLightIcon.classList.toggle('hidden');
-
-//     // if set via local storage previously
-//     if (localStorage.getItem('color-theme')) {
-//         if (localStorage.getItem('color-theme') === 'light') {
-//             document.documentElement.classList.add('dark');
-//             localStorage.setItem('color-theme', 'dark');
-//         } else {
-//             document.documentElement.classList.remove('dark');
-//             localStorage.setItem('color-theme', 'light');
-//         }
-
-//     // if NOT set via local storage previously
-//     } else {
-//         if (document.documentElement.classList.contains('dark')) {
-//             document.documentElement.classList.remove('dark');
-//             localStorage.setItem('color-theme', 'light');
-//         } else {
-//             document.documentElement.classList.add('dark');
-//             localStorage.setItem('color-theme', 'dark');
-//         }
-//     }
-// });
 </script>
