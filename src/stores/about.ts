@@ -23,7 +23,7 @@ export const aboutStore = defineStore({
       try {
         this.jobLoading = true;
         const cachedJobs = JSON.parse(
-          localStorage.getItem("jobsCached") || "null"
+          localStorage.getItem("jobsCached") || "null",
         );
         const currentTime = new Date().getTime();
         if (
@@ -43,7 +43,7 @@ export const aboutStore = defineStore({
                 "Content-Type": "application/json",
                 connection: "keep-alive",
               },
-            }
+            },
           );
           if (!response.ok) {
             throw new Error("Failed to get jobs.");
@@ -60,7 +60,7 @@ export const aboutStore = defineStore({
             JSON.stringify({
               data: this.jobs,
               timestamp: currentTime,
-            })
+            }),
           );
         }
       } catch (error) {
@@ -73,7 +73,7 @@ export const aboutStore = defineStore({
       try {
         this.educationLoading = true;
         const cachedEducation = JSON.parse(
-          localStorage.getItem("educationCached") || "null"
+          localStorage.getItem("educationCached") || "null",
         );
         const currentTime = new Date().getTime();
         if (
@@ -94,7 +94,7 @@ export const aboutStore = defineStore({
                 "Content-Type": "application/json",
                 connection: "keep-alive",
               },
-            }
+            },
           );
           if (!response.ok) {
             throw new Error("Failed to get education.");
@@ -108,7 +108,7 @@ export const aboutStore = defineStore({
             JSON.stringify({
               data: this.education,
               timestamp: currentTime,
-            })
+            }),
           );
         }
       } catch (error) {
