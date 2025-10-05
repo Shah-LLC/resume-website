@@ -62,6 +62,7 @@ export const useAboutStore = defineStore("about", () => {
         );
       }
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.error("Error:", error);
     } finally {
       jobLoading.value = false;
@@ -111,6 +112,7 @@ export const useAboutStore = defineStore("about", () => {
         );
       }
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.error("Error:", error);
     } finally {
       educationLoading.value = false;
