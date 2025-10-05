@@ -20,12 +20,22 @@
       <template v-for="(n, i) in nav" :key="{ i }">
         <RouterLink
           :to="n.path"
-          class="pt-8 uppercase hover:-translate-y-2 transition-transform duration-300 ease-in-out"
+          class="pt-8 uppercase hover:-translate-y-2 transition-all duration-300 ease-in-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pink-900 dark:focus-visible:ring-yellow-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-200 dark:focus-visible:ring-offset-gray-900 rounded-sm px-2 relative"
+          :class="
+            $route.path === n.path
+              ? 'font-semibold text-pink-900 dark:text-yellow-400'
+              : ''
+          "
           :aria-label="n.ariaLabel"
           :aria-current="n.path === $route.path ? 'page' : null"
         >
-          {{ n.name }}</RouterLink
-        >
+          {{ n.name }}
+          <!-- Active indicator dot -->
+          <span
+            v-if="$route.path === n.path"
+            class="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-1.5 h-1.5 bg-pink-900 dark:bg-yellow-400 rounded-full"
+          ></span>
+        </RouterLink>
       </template>
     </nav>
 
@@ -34,7 +44,7 @@
       @click="toggleMobileMenu"
       type="button"
       aria-label="Toggle mobile menu"
-      class="md:hidden p-2 rounded-lg hover:bg-pink-900/10 dark:hover:bg-yellow-500/10 transition-colors duration-200"
+      class="md:hidden p-2 rounded-lg hover:bg-pink-900/10 dark:hover:bg-yellow-500/10 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pink-900 dark:focus-visible:ring-yellow-400"
     >
       <Bars3Icon
         v-if="!isMobileMenuOpen"
@@ -48,7 +58,7 @@
       @click="toggleTheme"
       type="button"
       aria-label="Toggle dark mode"
-      class="hidden md:block p-2 rounded-lg hover:bg-pink-900/10 dark:hover:bg-yellow-500/10 transition-colors duration-200 flex-shrink-0"
+      class="hidden md:block p-2 rounded-lg hover:bg-pink-900/10 dark:hover:bg-yellow-500/10 transition-colors duration-200 flex-shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pink-900 dark:focus-visible:ring-yellow-400"
     >
       <!-- Sun icon (shown in dark mode) -->
       <SunIcon
@@ -103,7 +113,7 @@
           @click="toggleMobileMenu"
           type="button"
           aria-label="Close mobile menu"
-          class="p-2 rounded-lg hover:bg-pink-900/10 dark:hover:bg-yellow-500/10 transition-colors duration-200"
+          class="p-2 rounded-lg hover:bg-pink-900/10 dark:hover:bg-yellow-500/10 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pink-900 dark:focus-visible:ring-yellow-400"
         >
           <XMarkIcon class="w-6 h-6 text-gray-900 dark:text-slate-200" />
         </button>
@@ -115,7 +125,12 @@
           :key="i"
           :to="n.path"
           @click="toggleMobileMenu"
-          class="text-lg uppercase py-3 px-4 rounded-lg hover:bg-pink-900/10 dark:hover:bg-yellow-500/10 transition-colors duration-200 text-gray-900 dark:text-slate-200"
+          class="text-lg uppercase py-3 px-4 rounded-lg hover:bg-pink-900/10 dark:hover:bg-yellow-500/10 transition-all duration-200 text-gray-900 dark:text-slate-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pink-900 dark:focus-visible:ring-yellow-400 relative"
+          :class="
+            $route.path === n.path
+              ? 'font-bold text-pink-900 dark:text-yellow-400 border-l-4 border-pink-900 dark:border-yellow-400'
+              : ''
+          "
           :aria-label="n.ariaLabel"
           :aria-current="n.path === $route.path ? 'page' : null"
         >
@@ -128,7 +143,7 @@
           @click="toggleTheme"
           type="button"
           aria-label="Toggle dark mode"
-          class="w-full flex items-center justify-between p-3 rounded-lg hover:bg-pink-900/10 dark:hover:bg-yellow-500/10 transition-colors duration-200"
+          class="w-full flex items-center justify-between p-3 rounded-lg hover:bg-pink-900/10 dark:hover:bg-yellow-500/10 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pink-900 dark:focus-visible:ring-yellow-400"
         >
           <span
             class="text-sm uppercase font-semibold text-gray-900 dark:text-slate-200"
@@ -157,7 +172,7 @@ import {
   XMarkIcon,
 } from "@heroicons/vue/24/solid";
 import { useDarkMode } from "@/composables/useDarkMode";
-import { ref } from "vue";
+import { ref, watch, onMounted, onUnmounted } from "vue";
 
 const { isDark, toggleTheme } = useDarkMode();
 const isMobileMenuOpen = ref(false);
@@ -165,6 +180,33 @@ const isMobileMenuOpen = ref(false);
 const toggleMobileMenu = () => {
   isMobileMenuOpen.value = !isMobileMenuOpen.value;
 };
+
+// Handle escape key to close mobile menu
+const handleEscapeKey = (event: KeyboardEvent) => {
+  if (event.key === "Escape" && isMobileMenuOpen.value) {
+    toggleMobileMenu();
+  }
+};
+
+// Lock/unlock body scroll when mobile menu opens/closes
+watch(isMobileMenuOpen, (isOpen) => {
+  if (isOpen) {
+    document.body.style.overflow = "hidden";
+  } else {
+    document.body.style.overflow = "";
+  }
+});
+
+// Add/remove keyboard event listener
+onMounted(() => {
+  document.addEventListener("keydown", handleEscapeKey);
+});
+
+onUnmounted(() => {
+  document.removeEventListener("keydown", handleEscapeKey);
+  // Clean up body style on unmount
+  document.body.style.overflow = "";
+});
 
 const nav = [
   {

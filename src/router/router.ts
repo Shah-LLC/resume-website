@@ -29,6 +29,14 @@ const router = createRouter({
   routes,
   linkActiveClass:
     "underline decoration-solid underline-offset-8 decoration-pink-900 dark:decoration-yellow-400",
+  scrollBehavior(to, from, savedPosition) {
+    // If there's a saved position (back/forward navigation), use it
+    if (savedPosition) {
+      return savedPosition;
+    }
+    // Otherwise, scroll to top smoothly
+    return { top: 0, behavior: "smooth" };
+  },
 });
 
 export default router;
