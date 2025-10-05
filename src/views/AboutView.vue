@@ -24,17 +24,19 @@
   <!-- Main content with enhanced layout -->
   <div
     v-show="!isLoading"
-    class="flex flex-col lg:flex-row justify-center gap-12 lg:gap-20 px-4 lg:px-8 max-w-7xl mx-auto"
+    class="flex flex-col lg:flex-row justify-center gap-8 md:gap-12 lg:gap-20 px-4 sm:px-6 md:px-8 max-w-7xl mx-auto"
   >
     <!-- Experience Section -->
-    <section class="flex-1 space-y-8 fade-in-up delay-100">
-      <div class="sticky top-24 z-10 bg-slate-200 dark:bg-gray-900 pb-4">
+    <section class="flex-1 space-y-6 md:space-y-8 fade-in-up delay-100">
+      <div
+        class="sticky top-16 md:top-20 z-10 bg-slate-200 dark:bg-gray-900 pb-3 md:pb-4"
+      >
         <h1
-          class="relative text-5xl lg:text-6xl font-extralight tracking-tight"
+          class="relative text-4xl md:text-5xl lg:text-6xl font-extralight tracking-tight"
         >
           Experience
           <span
-            class="absolute -bottom-2 left-0 w-20 h-1 bg-gradient-to-r from-pink-900 to-pink-700 dark:from-yellow-500 dark:to-yellow-400 rounded-full"
+            class="absolute -bottom-2 left-0 w-16 md:w-20 h-1 bg-gradient-to-r from-pink-900 to-pink-700 dark:from-yellow-500 dark:to-yellow-400 rounded-full"
           ></span>
         </h1>
       </div>
@@ -45,24 +47,24 @@
         <li
           v-for="(job, id) in jobs"
           :key="id"
-          class="mb-12 ml-8 group fade-in-up"
+          class="mb-10 md:mb-12 ml-6 md:ml-8 group fade-in-up"
           :style="`animation-delay: ${(id + 2) * 100}ms`"
         >
           <!-- Timeline dot with pulse effect -->
           <span
-            class="absolute flex items-center justify-center w-8 h-8 rounded-full -left-4 ring-4 bg-pink-900 dark:bg-yellow-500 ring-slate-200 dark:ring-gray-900 transition-all duration-300 group-hover:ring-8 group-hover:scale-110 group-hover:shadow-lg"
+            class="absolute flex items-center justify-center w-7 h-7 md:w-8 md:h-8 rounded-full -left-3.5 md:-left-4 ring-4 bg-pink-900 dark:bg-yellow-500 ring-slate-200 dark:ring-gray-900 transition-all duration-300 group-hover:ring-8 group-hover:scale-110 group-hover:shadow-lg"
           >
             <CalendarIcon
-              class="w-4 h-4 fill-slate-200 dark:fill-gray-900 transition-transform group-hover:scale-110"
+              class="w-3.5 h-3.5 md:w-4 md:h-4 fill-slate-200 dark:fill-gray-900 transition-transform group-hover:scale-110"
             />
           </span>
 
           <!-- Job content card -->
           <div
-            class="p-6 rounded-lg bg-slate-100/50 dark:bg-gray-800/50 backdrop-blur-sm border border-pink-900/10 dark:border-yellow-500/10 transition-all duration-300 hover:border-pink-900/30 dark:hover:border-yellow-500/30 hover:shadow-lg hover:-translate-y-1"
+            class="p-4 md:p-6 rounded-lg bg-slate-100/50 dark:bg-gray-800/50 backdrop-blur-sm border border-pink-900/10 dark:border-yellow-500/10 transition-all duration-300 hover:border-pink-900/30 dark:hover:border-yellow-500/30 hover:shadow-lg hover:-translate-y-1"
           >
             <h2
-              class="flex flex-wrap items-baseline gap-2 mb-3 text-2xl font-semibold"
+              class="flex flex-wrap items-baseline gap-2 mb-2 md:mb-3 text-xl md:text-2xl font-semibold"
             >
               <span>{{ job.jobTitle }}</span>
               <span class="text-pink-900 dark:text-yellow-500 font-bold">
@@ -86,14 +88,16 @@
     </section>
 
     <!-- Education Section -->
-    <section class="flex-1 space-y-8 fade-in-up delay-200">
-      <div class="sticky top-24 z-10 bg-slate-200 dark:bg-gray-900 pb-4">
+    <section class="flex-1 space-y-6 md:space-y-8 fade-in-up delay-200">
+      <div
+        class="sticky top-16 md:top-20 z-10 bg-slate-200 dark:bg-gray-900 pb-3 md:pb-4"
+      >
         <h1
-          class="relative text-5xl lg:text-6xl font-extralight tracking-tight"
+          class="relative text-4xl md:text-5xl lg:text-6xl font-extralight tracking-tight"
         >
           Education
           <span
-            class="absolute -bottom-2 left-0 w-20 h-1 bg-gradient-to-r from-pink-900 to-pink-700 dark:from-yellow-500 dark:to-yellow-400 rounded-full"
+            class="absolute -bottom-2 left-0 w-16 md:w-20 h-1 bg-gradient-to-r from-pink-900 to-pink-700 dark:from-yellow-500 dark:to-yellow-400 rounded-full"
           ></span>
         </h1>
       </div>
@@ -104,24 +108,24 @@
         <li
           v-for="(edu, id) in education"
           :key="id"
-          class="mb-12 ml-8 group fade-in-up"
+          class="mb-10 md:mb-12 ml-6 md:ml-8 group fade-in-up"
           :style="`animation-delay: ${(id + 3) * 100}ms`"
         >
           <!-- Timeline dot with pulse effect -->
           <span
-            class="absolute flex items-center justify-center w-8 h-8 rounded-full -left-4 ring-4 bg-pink-900 dark:bg-yellow-500 ring-slate-200 dark:ring-gray-900 transition-all duration-300 group-hover:ring-8 group-hover:scale-110 group-hover:shadow-lg"
+            class="absolute flex items-center justify-center w-7 h-7 md:w-8 md:h-8 rounded-full -left-3.5 md:-left-4 ring-4 bg-pink-900 dark:bg-yellow-500 ring-slate-200 dark:ring-gray-900 transition-all duration-300 group-hover:ring-8 group-hover:scale-110 group-hover:shadow-lg"
           >
             <AcademicCapIcon
-              class="w-4 h-4 fill-slate-200 dark:fill-gray-900 transition-transform group-hover:scale-110"
+              class="w-3.5 h-3.5 md:w-4 md:h-4 fill-slate-200 dark:fill-gray-900 transition-transform group-hover:scale-110"
             />
           </span>
 
           <!-- Education content card -->
           <div
-            class="p-6 rounded-lg bg-slate-100/50 dark:bg-gray-800/50 backdrop-blur-sm border border-pink-900/10 dark:border-yellow-500/10 transition-all duration-300 hover:border-pink-900/30 dark:hover:border-yellow-500/30 hover:shadow-lg hover:-translate-y-1"
+            class="p-4 md:p-6 rounded-lg bg-slate-100/50 dark:bg-gray-800/50 backdrop-blur-sm border border-pink-900/10 dark:border-yellow-500/10 transition-all duration-300 hover:border-pink-900/30 dark:hover:border-yellow-500/30 hover:shadow-lg hover:-translate-y-1"
           >
             <h2
-              class="mb-3 text-2xl font-bold text-pink-900 dark:text-yellow-500"
+              class="mb-2 md:mb-3 text-xl md:text-2xl font-bold text-pink-900 dark:text-yellow-500"
             >
               {{ edu.university }}
             </h2>
