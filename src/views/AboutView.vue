@@ -145,12 +145,12 @@
 </template>
 <script setup lang="ts">
 import { CalendarIcon, AcademicCapIcon } from "@heroicons/vue/24/solid";
-import { aboutStore } from "@/stores/about";
+import { useAboutStore } from "@/stores/about";
 import { storeToRefs } from "pinia";
 import { onMounted } from "vue";
 
-const about = aboutStore();
-const { jobs, education, isLoading } = storeToRefs(aboutStore());
+const about = useAboutStore();
+const { jobs, education, isLoading } = storeToRefs(about);
 
 onMounted(() => {
   about.fetchJobs();
